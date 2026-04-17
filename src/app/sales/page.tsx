@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState, useCallback, useRef } from "react";
+
+const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 import QRCode from "react-qr-code";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
@@ -106,7 +108,7 @@ export default function SalesPage() {
     customer_name: "", discount_amount: "0", apply_vat: true,
     payment_method: "cash", notes: "", sale_date: new Date().toISOString().split("T")[0],
   });
-  const [cartItems,  setCartItems]  = useState<CartItem[]>([{ uid: crypto.randomUUID(), product_id: "", quantity: "1", unit_price: "" }]);
+  const [cartItems,  setCartItems]  = useState<CartItem[]>([{ uid: uid(), product_id: "", quantity: "1", unit_price: "" }]);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const load = useCallback(async () => {
@@ -132,12 +134,12 @@ export default function SalesPage() {
 
   const openCreate = () => {
     setForm({ customer_name: "", discount_amount: "0", apply_vat: true, payment_method: "cash", notes: "", sale_date: new Date().toISOString().split("T")[0] });
-    setCartItems([{ uid: crypto.randomUUID(), product_id: "", quantity: "1", unit_price: "" }]);
+    setCartItems([{ uid: uid(), product_id: "", quantity: "1", unit_price: "" }]);
     setFormErrors({});
     setModalOpen(true);
   };
 
-  const addCartItem    = () => setCartItems([...cartItems, { uid: crypto.randomUUID(), product_id: "", quantity: "1", unit_price: "" }]);
+  const addCartItem    = () => setCartItems([...cartItems, { uid: uid(), product_id: "", quantity: "1", unit_price: "" }]);
   const removeCartItem = (i: number) => setCartItems(cartItems.filter((_, idx) => idx !== i));
   const updateCartItem = (i: number, field: keyof CartItem, val: string) => {
     const updated = [...cartItems];
