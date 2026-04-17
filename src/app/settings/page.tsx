@@ -71,7 +71,7 @@ export default function SettingsPage() {
 
       const fd = new FormData();
       fd.append('logo', file);
-      const res = await fetch('http://localhost:8000/api/settings/logo', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/settings/logo`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         body: fd,

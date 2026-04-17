@@ -232,7 +232,7 @@ export default function SalesPage() {
 
   const downloadInvoice = (id: string) => {
     const token = getToken();
-    fetch(`http://localhost:8000/api/sales/${id}/invoice/download`, { headers: { Authorization: `Bearer ${token}` } })
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/sales/${id}/invoice/download`, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => res.blob())
       .then((blob) => {
         const url = URL.createObjectURL(blob);
